@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@1,500&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+.Main {
+  height: 100vh;
+}
+
+.Main-SingIn {
+  height: 95vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 15px;
+  /* border: 2px solid black; */
+}
+
+.Login-Button {
+  font-family: "Roboto", sans-serif;
+  font-weight: 350;
+  font-style: normal;
+  color: white;
+  text-align: center;
+  width: 95px;
+  height: 35px;
+  background-color: #0057ff;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.Create-Account-Button {
+  font-family: "Roboto", sans-serif;
+  font-weight: 350;
+  font-style: normal;
+  color: white;
+  text-align: center;
+  width: 205px;
+  height: 22px;
+  background-color: #000;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.inputs {
+  width: 205px;
+  height: 26px;
+}
+
+.Terms-Privacy {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+  /* border: 2px solid blue; */
+}
+
+.links {
+  font-size: 10px;
+  color: black;
+  font-weight: 600;
+}
+
+input[type="text"] {
+  border: 1px solid rgba(0, 0, 0, 0.23);
+  border-radius: 4px;
+}
