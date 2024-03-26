@@ -19,9 +19,9 @@ function App() {
               LOGIN
             </Link>
           </button>
-          <button type="button" className="Create-Account-Button">
+          {/* <button type="button" className="Create-Account-Button">
             CREATE NEW ACCOUNT
-          </button>
+          </button> */}
           <Link className="links" to="" style={{ textDecoration: "none" }}>
             Forgot your password?
           </Link>

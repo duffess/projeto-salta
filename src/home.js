@@ -10,22 +10,22 @@ function Home() {
       </div>
       <main className="main">
         <section className="section">
-          <h2>REGISTRO DE FORNECEDOR</h2>
-          <Link to="/registro">ENTRAR</Link>
+          <h2>ÁREA DE REGISTROS</h2>
+          <Link to="/areaRegistro">ENTRAR</Link>
         </section>
 
         <section className="section">
-          <h2>REGISTRO DE CONTRATOS</h2>
-          <Link to="/acompanhamento">ENTRAR</Link>
+          <h2>ÁREA DE ACOMPANHAMENTO</h2>
+          <Link to="/areaAcompanhamento">ENTRAR</Link>
         </section>
 
         <section className="section">
-          <h2>REGISTRO DE PROJETOS</h2>
-          <Link to="/pagamentos">ENTRAR</Link>
+          <h2>CENTRAL DE PAGAMENTOS</h2>
+          <Link to="/centralPagamento">ENTRAR</Link>
         </section>
 
         <section className="section">
-          <h2>REGISTRO DE PROPOSTAS</h2>
+          <h2>CENTRAL DO DIRETOR</h2>
           <Link to="/diretor">ENTRAR</Link>
         </section>
       </main>
