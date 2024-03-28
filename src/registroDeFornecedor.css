@@ -5,13 +5,43 @@
   box-sizing: border-box;
 }
 
+.popup-content {
+  width: 300px;
+  height: 220px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 30px;
+  gap: 13px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.062);
+  color: black !important;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Cores */
 body {
   background-color: #f2f2f2;
   font-family: Arial, sans-serif;
 }
 
-.content-registro-de-fornecedor{
+.content-registro-de-fornecedor {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,16 +50,23 @@ body {
 
 .container-registro-de-fornecedor {
   height: 100vh;
-  max-width: 960px;
+  width: 100vw;
   margin: 0 auto;
   padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 header {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: #1363df;
+  top: 0;
   text-align: center;
 }
 
@@ -39,6 +76,7 @@ header h1 {
 }
 
 main {
+  width: 45vw;
   padding: 20px;
   background-color: #fff;
   border-radius: 10px;
@@ -48,7 +86,7 @@ main {
   flex-direction: column;
 }
 
-.botoesAjuste{
+.botoesAjuste {
   display: flex;
   flex-direction: row;
   gap: 30px;
@@ -56,7 +94,11 @@ main {
 
 .botoesAjuste button {
   width: calc(auto + 20px);
-  
+  background-color: #1363df;
+}
+
+.botoesAjuste button:hover{
+  background-color: #87A8DB;
 }
 
 section {
@@ -95,6 +137,7 @@ select {
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
+  background-color: #BBDEEC;
 }
 
 select {
@@ -119,17 +162,31 @@ button {
   margin-top: 20px;
 }
 
-button:hover {
+
+
+.buttonSubmit:hover {
   background-color: #222;
 }
 
-footer {
+.footer {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 10px 20px;
   text-align: center;
-  padding: 20px;
-  background-color: #f2f2f2;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
-footer p {
-  font-size: 14px;
-  color: #666;
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.footer p {
+  margin: 0;
 }
