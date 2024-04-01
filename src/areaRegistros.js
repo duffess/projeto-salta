@@ -17,7 +17,7 @@ function Home() {
 
     <section className="section-Area-Registros">
       <h2>REGISTRO DE CONTRATOS</h2>
-      <Link to="/acompanhamento">ENTRAR</Link>
+      <Link to="/registroDeContratos">ENTRAR</Link>
     </section>
 
     <section className="section-Area-Registros">

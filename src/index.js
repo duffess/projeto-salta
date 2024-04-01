@@ -5,6 +5,7 @@ import Login from "./login";
 import Home from "./home";
 import AreaRegistro from "./areaRegistros.js";
 import RegistroDeFornecedor from "./registroDeFornecedor.js";
+import RegistroDeContratos from "./registroDeContratos.js";
 import AreaAcompanhamento from "./areaAcompanhamento.js";
 import CentralPagamento from "./centralPagamento.js";
 
@@ -19,6 +20,7 @@ root.render(
         <Route path="/home" element={<Home />} />
         <Route path="/areaRegistro" element={<AreaRegistro />} />
         <Route path="/registroDeFornecedor" element={<RegistroDeFornecedor />} />
+        <Route path="/registroDeContratos" element={<RegistroDeContratos />} />
         <Route path="/areaAcompanhamento" element={<AreaAcompanhamento />} />
         <Route path="/centralPagamento" element={<CentralPagamento />} />
       </Routes>

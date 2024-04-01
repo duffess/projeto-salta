@@ -8,7 +8,7 @@ function Home() {
       <div className="header">
         <div className="logo">SALTA INTELIGÊNCIA</div>
       </div>
-      <main className="main">
+      <main className="main-home">
         <section className="section">
           <h2>ÁREA DE REGISTROS</h2>
           <Link to="/areaRegistro">ENTRAR</Link>
