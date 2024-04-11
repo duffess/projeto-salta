@@ -1,11 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import Login from "./login";
-import Home from "./home";
+import Login from "./login.js";
+import Home from "./home.js";
 import AreaRegistro from "./areaRegistros.js";
 import RegistroDeFornecedor from "./registroDeFornecedor.js";
-import RegistroDeContratos from "./registroDeContratos.js";
+import RegistroDeContratosSpot from "./registroDeContratosSpot.js";
+import RegistroDeContratosAnual from "./registroDeContratosAnual.js";
+import RegistroDeContratosObras from "./registroDeContratosObras.js";
 import AreaAcompanhamento from "./areaAcompanhamento.js";
 import CentralPagamento from "./centralPagamento.js";
 
@@ -20,7 +22,9 @@ root.render(
         <Route path="/home" element={<Home />} />
         <Route path="/areaRegistro" element={<AreaRegistro />} />
         <Route path="/registroDeFornecedor" element={<RegistroDeFornecedor />} />
-        <Route path="/registroDeContratos" element={<RegistroDeContratos />} />
+        <Route path="/registroDeContratosSpot" element={<RegistroDeContratosSpot />} />
+        <Route path="/registroDeContratosAnual" element={<RegistroDeContratosAnual />} />
+        <Route path="/registroDeContratosObras" element={<RegistroDeContratosObras />} />
         <Route path="/areaAcompanhamento" element={<AreaAcompanhamento />} />
         <Route path="/centralPagamento" element={<CentralPagamento />} />
       </Routes>

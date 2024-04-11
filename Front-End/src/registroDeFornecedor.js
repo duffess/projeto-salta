@@ -14,13 +14,20 @@ const App = () => {
   const [conta, setConta] = useState("");
   const [dv, setDv] = useState("");
   const [showPopUp, setShowPopUp] = useState(false);
+  const [formData, setFormData] = useState({});
+
+
+  const handleChange = (event) => {
+    const updatedFormData = { ...formData, [event.target.name]: event.target.value };
+    setFormData(updatedFormData);
+  };
 
   const handleSubmit = async (e, formData, setFormData) => {
     e.preventDefault();
-
+    console.log("Dados a serem enviados:", formData);
     try {
       const response = await fetch(
-        "http://localhost:8000/api/registros/fornecedores/",
+        "http://127.0.0.1:8000/registro/fornecedor/",
         {
           method: "POST",
           headers: {
@@ -41,7 +48,7 @@ const App = () => {
           banco: "",
           agencia: "",
           conta: "",
-          dv: "",
+          dv: "", 
         });
 
         setShowPopUp(true);
@@ -87,16 +94,16 @@ const App = () => {
       <header>
         <h1>SALTA INTELIGÊNCIA</h1>
       </header>
-      <main>
-        <div className="botoesAjuste">
-          <button>Registro</button>
-          <button>Ajuste</button>
-        </div>
+      <main className="main-fornecedor">
+          <div className="botoesAjuste">
+            <button>Registro</button>
+            <button>Ajuste</button>
+          </div>
 
         <section className="content-registro-de-fornecedor">
           <form onSubmit={handleSubmit}>
             <div className="inputs-container">
-              <div className="input-group">
+              {/* <div className="input-group">
                 <label htmlFor="tipoDocumento">Tipo de Documento</label>
                 <select
                   id="tipoDocumento"
@@ -107,7 +114,7 @@ const App = () => {
                   <option value="cpf">CPF</option>
                   <option value="cnpj">CNPJ</option>
                 </select>
-              </div>
+              </div> */}
               <div className="input-group">
                 <label htmlFor="documento">
                   {tipoDocumento === "cpf" ? "CPF" : "CNPJ"}

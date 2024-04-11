@@ -75,7 +75,7 @@ header h1 {
   font-size: 24px;
 }
 
-main {
+.main-fornecedor {
   width: 45vw;
   padding: 20px;
   background-color: #fff;
@@ -84,6 +84,7 @@ main {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  display: flex;
 }
 
 .botoesAjuste {
@@ -189,4 +190,31 @@ button {
 
 .footer p {
   margin: 0;
+}
+
+
+/* - - - - - - - -  */
+
+.botoesContratos{
+  gap: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  display: flex;
+}
+
+.botoesContratos a{
+    margin-top: 20px;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    text-decoration: none;
+    color: var(--secondary-color);
+}
+
+.botoesContratos a:hover{
+  background-color: #87a8db;
+  color: #000;
 }
