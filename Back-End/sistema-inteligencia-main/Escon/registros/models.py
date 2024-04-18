@@ -29,14 +29,14 @@ class ContadorCodigoContratoObras(models.Model):
 
 class Fornecedor(models.Model):
     documento = models.CharField(max_length=50)
-    razaoSocial = models.CharField(max_length=250)
+    razao_social = models.CharField(max_length=250)
     email = models.CharField(max_length=250)
-    tipoConta = models.CharField(max_length=50)
+    tipo_conta = models.CharField(max_length=50)
     banco = models.CharField(max_length=100)
     conta = models.CharField(max_length=100) 
     agencia = models.CharField(max_length=100) 
     dv = models.CharField(max_length=100) 
-    tipoPagamento = models.CharField(max_length=100)
+    tipo_pagamento = models.CharField(max_length=100)
 
     def __str__(self):
         return self.documento
@@ -44,56 +44,56 @@ class Fornecedor(models.Model):
 
 class Contrato_Spot(models.Model):
     
-    cod_contrato = models.CharField(max_length=20, default='', blank=True)
-    data_registro = models.DateTimeField(auto_now=True)
+    cod_contrato = models.CharField(max_length=20, default='', blank=True) # não é um input de form (front-end)
+    data_registro = models.DateTimeField(auto_now=True) # não é um input de form (front-end)
 
     marca = models.ForeignKey(Marca, on_delete=models.DO_NOTHING)
     unidade = models.ForeignKey(Unidade, on_delete=models.DO_NOTHING)
     fornecedor = models.ForeignKey(Fornecedor, on_delete=models.DO_NOTHING)
     natureza_orcamentaria = models.ForeignKey(NaturezaOrcamentaria, on_delete=models.DO_NOTHING)
     
-    ano_vigencia = models.CharField(max_length=10, blank=True)
+    ano_vigencia = models.CharField(max_length=10, blank=True) # não é um input de form (front-end)
     descricao_servico = models.TextField()
-    valor_mensal = models.FloatField(default=0)
+    valor_mensal = models.FloatField(default=0) # não é um input de form (front-end)
     valor_contratado = models.FloatField(default=0)
-    mes_entrada = models.IntegerField(blank=True)
+    mes_entrada = models.IntegerField(blank=True) # não é um input de form (front-end)
     distribuicao_mes = models.IntegerField(default=1)
-    solicitante = models.CharField(max_length=100)
+    solicitante = models.CharField(max_length=100) # não é um input de form (front-end)
     categoria = models.CharField(max_length=100)
     links_docs = models.TextField()
     numero_otrs = models.CharField(max_length=100)
     data_registro_otrs = models.CharField(max_length=100)
-    contr_prop = models.CharField(max_length=100)
-    info_diversas = models.CharField(max_length=200)
-    renovacao_automatica = models.CharField(max_length=10)
-    indice_reajuste = models.CharField(max_length=10, default='')
+    contr_prop = models.CharField(max_length=100) # não é um input de form (front-end)
+    info_diversas = models.CharField(max_length=200) # não é um input de form (front-end)
+    renovacao_automatica = models.CharField(max_length=10) # não é um input de form (front-end)
+    indice_reajuste = models.CharField(max_length=10, default='') # não é um input de form (front-end)
 
     def __str__(self):
         return self.cod_contrato
     
 class Contrato_Anual(models.Model):
     
-    cod_contrato = models.CharField(max_length=20, default='', blank=True)
-    data_registro = models.DateTimeField(auto_now=True)
+    cod_contrato = models.CharField(max_length=20, default='', blank=True) # não é um input de form (front-end)
+    data_registro = models.DateTimeField(auto_now=True) # não é um input de form (front-end)
 
     marca = models.ForeignKey(Marca, on_delete=models.DO_NOTHING)
     unidade = models.ForeignKey(Unidade, on_delete=models.DO_NOTHING)
     fornecedor = models.ForeignKey(Fornecedor, on_delete=models.DO_NOTHING)
     natureza_orcamentaria = models.ForeignKey(NaturezaOrcamentaria, on_delete=models.DO_NOTHING)
     
-    mes_renovacao = models.IntegerField(default=1)
+    mes_renovacao = models.IntegerField(default=1) # não é um input de form (front-end)
     descricao_servico = models.TextField()
     valor_mensal = models.FloatField(default=0)
-    valor_contratado = models.FloatField(default=0)
-    mes_entrada = models.IntegerField(blank=True)
-    distribuicao_mes = models.IntegerField(blank=True)
-    solicitante = models.CharField(max_length=100)
-    categoria = models.CharField(max_length=100)
-    links_docs = models.TextField()
+    valor_contratado = models.FloatField(default=0) # não é um input de form (front-end)
+    mes_entrada = models.IntegerField(blank=True) # não é um input de form (front-end)
+    distribuicao_mes = models.IntegerField(blank=True) # não é um input de form (front-end)
+    solicitante = models.CharField(max_length=100) # não é um input de form (front-end)
+    categoria = models.CharField(max_length=100) # não é um input de form (front-end)
+    links_docs = models.TextField() 
     numero_otrs = models.CharField(max_length=100)
     data_registro_otrs = models.CharField(max_length=100)
-    contr_prop = models.CharField(max_length=100)
-    info_diversas = models.CharField(max_length=200) # Gerar o CONCAT das informacoes de para Limpeza e Segurança pelo Front-End
+    contr_prop = models.CharField(max_length=100) # não é um input de form (front-end)
+    info_diversas = models.CharField(max_length=200) # Gerar o CONCAT das informacoes de para Limpeza e Segurança pelo Front-End - VEM DO FRONT
     renovacao_automatica = models.CharField(max_length=10)
     indice_reajuste = models.CharField(max_length=10, default='')
 
@@ -102,29 +102,29 @@ class Contrato_Anual(models.Model):
     
 class Contrato_Obras(models.Model):
     
-    cod_contrato = models.CharField(max_length=20, default='', blank=True)
-    data_registro = models.DateTimeField(auto_now=True)
+    cod_contrato = models.CharField(max_length=20, default='', blank=True) # não é um input de form (front-end)
+    data_registro = models.DateTimeField(auto_now=True) # não é um input de form (front-end)
 
     marca = models.ForeignKey(Marca, on_delete=models.DO_NOTHING)
     unidade = models.ForeignKey(Unidade, on_delete=models.DO_NOTHING)
     fornecedor = models.ForeignKey(Fornecedor, on_delete=models.DO_NOTHING)
     natureza_orcamentaria = models.ForeignKey(NaturezaOrcamentaria, on_delete=models.DO_NOTHING)
     
-    ano_vigencia = models.CharField(choices=LISTA_ANO_VIGENCIA, max_length=10)
+    ano_vigencia = models.CharField( max_length=10)
     descricao_servico = models.TextField()
-    valor_mensal = models.FloatField(default=0)
+    valor_mensal = models.FloatField(default=0) # não é um input de form (front-end)
     valor_contratado = models.FloatField(default=0)
-    mes_entrada = models.IntegerField(blank=True)
+    mes_entrada = models.IntegerField(blank=True) # não é um input de form (front-end)
     distribuicao_mes = models.IntegerField(default=1)
     solicitante = models.CharField(max_length=100)
-    categoria = models.CharField(max_length=100)
+    categoria = models.CharField(max_length=100) # não é um input de form (front-end)
     links_docs = models.TextField()
     numero_otrs = models.CharField(max_length=100)
     data_registro_otrs = models.CharField(max_length=100)
     contr_prop = models.CharField(max_length=100)
     info_diversas = models.CharField(max_length=200)
-    renovacao_automatica = models.CharField(max_length=10)
-    indice_reajuste = models.CharField(max_length=10, default='')
+    renovacao_automatica = models.CharField(max_length=10) # não é um input de form (front-end)
+    indice_reajuste = models.CharField(max_length=10, default='') # não é um input de form (front-end)
 
     def __str__(self):
         return self.cod_contrato
@@ -187,11 +187,11 @@ def criar_mes_entrada():
     # Funcao para criar o distribuicao_mes
 
 def criar_distribuicao_mes():
-    quant_mes = 13 - datetime.now().month
+    quant_mes = 1 - datetime.now().month
     return quant_mes
 
 # Funcoes para atualização dos atrubutos
-    # Funcao para criar salvar cod_contrato
+#     Funcao para criar salvar cod_contrato
 
 @receiver(pre_save, sender=Contrato_Spot)
 def pre_save_contrato_spot(sender, instance, **kwargs):

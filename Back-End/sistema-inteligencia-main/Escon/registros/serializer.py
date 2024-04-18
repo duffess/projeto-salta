@@ -15,14 +15,14 @@ class SerializerFornecedor(serializers.ModelSerializer):
 class SerializerContratoAnual(serializers.ModelSerializer):
     class Meta:
         model = Contrato_Anual
-        fields = "__all__"
+        fields = ["marca", "unidade", "fornecedor", "natureza_orcamentaria", "descricao_servico", "valor_mensal", "links_docs", "numero_otrs", "data_registro_otrs", "renovacao_automatica", "indice_reajuste"]
 
 class SerializerContratoSpot(serializers.ModelSerializer):
     class Meta:
         model = Contrato_Spot
-        fields = "__all__"
+        fields = ["marca", "unidade", "fornecedor", "natureza_orcamentaria", "descricao_servico", "valor_contratado", "distribuicao_mes", "categoria", "links_docs", "numero_otrs", "data_registro_otrs"]
 
 class SerializerContratoObras(serializers.ModelSerializer):
     class Meta:
         model = Contrato_Obras
-        fields = "__all__"
+        fields = ["marca", "unidade", "fornecedor", "natureza_orcamentaria", "ano_vigencia", "descricao_servico", "valor_contratado", "distribuicao_mes", "solicitante", "links_docs", "numero_otrs", "data_registro_otrs", "contr_prop", "info_diversas"]

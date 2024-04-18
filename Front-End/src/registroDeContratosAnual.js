@@ -3,55 +3,82 @@ import { Link } from "react-router-dom";
 import "./registroDeFornecedor.css";
 
 const App = () => {
-  const [codigoContrato, setCodigoContrato] = useState("");
   const [marca, setMarca] = useState("");
   const [unidade, setUnidade] = useState("");
   const [fornecedor, setFornecedor] = useState("");
-  const [anoVigencia, setAnoVigencia] = useState("");
   const [linhaOrcamentaria, setLinhaOrcamentaria] = useState("");
   const [descricaoServico, setDescricaoServico] = useState("");
-  const [categoria, setCategoria] = useState("");
-  const [valorContratado, setValorContratado] = useState("");
-  const [distribuicaoMes, setDistribuicaoMes] = useState("");
-  const [nOTRS, setNOTRS] = useState("");
+  const [valorMensal, setValorMensal] = useState("");
   const [linkDocumentacao, setLinkDocumentacao] = useState("");
+  const [nOTRS, setNOTRS] = useState("");
+  const [dataRegistroOTRS, setDataRegistroOTRS] = useState("");
+  const [renovacaoAutomatica, setRenovacaoAutomatica] = useState("");
+  const [indiceReajuste, setIndiceReajuste] = useState("");
   const [showPopUp, setShowPopUp] = useState(false);
 
-  const handleSubmit = async (e, formData, setFormData) => {
+  const handleSubmit = async (
+    e,
+    marca,
+    unidade,
+    fornecedor,
+    linhaOrcamentaria,
+    descricaoServico,
+    valorMensal,
+    linkDocumentacao,
+    nOTRS,
+    dataRegistroOTRS,
+    renovacaoAutomatica,
+    indiceReajuste
+  ) => {
     e.preventDefault();
-
+    console.log("Dados a serem enviados:", {
+      marca: marca,
+      unidade: unidade,
+      fornecedor: fornecedor,
+      linhaOrcamentaria: linhaOrcamentaria,
+      descricaoServico: descricaoServico,
+      valorMensal: valorMensal,
+      linkDocumentacao: linkDocumentacao,
+      nOTRS: nOTRS,
+      dataRegistroOTRS: dataRegistroOTRS,
+      renovacaoAutomatica: renovacaoAutomatica,
+      indiceReajuste: indiceReajuste,
+    });
     try {
       const response = await fetch(
-        "http://localhost:8000/api/registros/fornecedores/",
+        "http://127.0.0.1:8000/registro/contrato_anual/",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify({
+            marca: marca,
+            unidade: unidade,
+            fornecedor: fornecedor,
+            natureza_orcamentaria: linhaOrcamentaria,
+            descricao_servico: descricaoServico,
+            valor_mensal: valorMensal,
+            links_docs: linkDocumentacao,
+            numero_otrs: nOTRS,
+            data_registro_otrs: dataRegistroOTRS,
+            renovacao_automatica: renovacaoAutomatica,
+            indice_reajuste: indiceReajuste,
+          }),
         }
       );
-
-      if (response.ok) {
-        setFormData({
-          codigoContrato: "",
-          marca: "",
-          unidade: "",
-          fornecedor: "",
-          anoVigencia: "",
-          linhaOrcamentaria: "",
-          descricaoServico: "",
-          categoria: "",
-          valorContratado: "",
-          distribuicaoMes: "",
-          nOTRS: "",
-          linkDocumentacao: "",
-        });
-
-        setShowPopUp(true);
-      } else {
-        console.error("Erro ao enviar os dados:", response.statusText);
-      }
+      setMarca("");
+      setUnidade("");
+      setFornecedor("");
+      setLinhaOrcamentaria("");
+      setDescricaoServico("");
+      setValorMensal("");
+      setLinkDocumentacao("");
+      setNOTRS("");
+      setDataRegistroOTRS("");
+      setRenovacaoAutomatica("");
+      setIndiceReajuste("");
+      setShowPopUp(true);
     } catch (error) {
       console.error("Erro ao enviar os dados:", error.message);
     }
@@ -83,24 +110,39 @@ const App = () => {
         <h1>SALTA INTELIGÊNCIA</h1>
       </header>
       <main className="main-fornecedor">
-
-      <div className="paiBotoes">
+        <div className="paiBotoes">
           <div className="botoesAjuste">
             <button>Registro</button>
             <button>Ajuste</button>
           </div>
 
           <div className="botoesContratos">
-          <Link to="/registroDeContratosSpot">SPOT</Link>
-          <Link to="/registroDeContratosAnual">ANUAL</Link>
-          <Link to="/registroDeContratosObras">OBRAS</Link>
+            <Link to="/registroDeContratosSpot">SPOT</Link>
+            <Link to="/registroDeContratosAnual">ANUAL</Link>
+            <Link to="/registroDeContratosObras">OBRAS</Link>
           </div>
         </div>
         <section className="content-registro-de-fornecedor">
-          <form onSubmit={handleSubmit}>
+          <form
+            onSubmit={(e) =>
+              handleSubmit(
+                e,
+                marca,
+                unidade,
+                fornecedor,
+                linhaOrcamentaria,
+                descricaoServico,
+                valorMensal,
+                linkDocumentacao,
+                nOTRS,
+                dataRegistroOTRS,
+                renovacaoAutomatica,
+                indiceReajuste
+              )
+            }
+          >
             <div className="inputs-container">
-              <div className="input-group">
-              </div>
+              <div className="input-group"></div>
               <div className="input-group">
                 <label htmlFor="marca">Marca</label>
                 <input
@@ -135,17 +177,6 @@ const App = () => {
                 />
               </div>
               <div className="input-group">
-                <label htmlFor="anoVigencia">Ano de Vigência</label>
-                <input
-                  type="text"
-                  id="anoVigencia"
-                  name="anoVigencia"
-                  value={anoVigencia}
-                  onChange={(e) => setAnoVigencia(e.target.value)}
-                  autoComplete="off"
-                />
-              </div>
-              <div className="input-group">
                 <label htmlFor="linhaOrcamentaria">Linha Orçamentária</label>
                 <input
                   type="text"
@@ -168,35 +199,13 @@ const App = () => {
                 />
               </div>
               <div className="input-group">
-                <label htmlFor="categoria">Categoria</label>
+                <label htmlFor="valorMensal">Valor mensal</label>
                 <input
                   type="text"
-                  id="categoria"
-                  name="categoria"
-                  value={categoria}
-                  onChange={(e) => setCategoria(e.target.value)}
-                  autoComplete="off"
-                />
-              </div>
-              <div className="input-group">
-                <label htmlFor="valorContratado">Valor Contratado</label>
-                <input
-                  type="text"
-                  id="valorContratado"
-                  name="valorContratado"
-                  value={valorContratado}
-                  onChange={(e) => setValorContratado(e.target.value)}
-                  autoComplete="off"
-                />
-              </div>
-              <div className="input-group">
-                <label htmlFor="distribuicaoMes">Distribuição Mês</label>
-                <input
-                  type="text"
-                  id="distribuicaoMes"
-                  name="distribuicaoMes"
-                  value={distribuicaoMes}
-                  onChange={(e) => setDistribuicaoMes(e.target.value)}
+                  id="valorMensal"
+                  name="valorMensal"
+                  value={valorMensal}
+                  onChange={(e) => setValorMensal(e.target.value)}
                   autoComplete="off"
                 />
               </div>
@@ -212,6 +221,19 @@ const App = () => {
                 />
               </div>
               <div className="input-group">
+                <label htmlFor="dataDeRegistroOTRS">
+                  Data de Registro OTRS
+                </label>
+                <input
+                  type="text"
+                  id="dataRegistroOtrs"
+                  name="dataRegistroOtrs"
+                  value={dataRegistroOTRS}
+                  onChange={(e) => setDataRegistroOTRS(e.target.value)}
+                  autoComplete="off"
+                />
+              </div>
+              <div className="input-group">
                 <label htmlFor="linkDocumentacao">Link Documentação</label>
                 <input
                   type="text"
@@ -219,6 +241,30 @@ const App = () => {
                   name="linkDocumentacao"
                   value={linkDocumentacao}
                   onChange={(e) => setLinkDocumentacao(e.target.value)}
+                  autoComplete="off"
+                />
+              </div>
+              <div className="input-group">
+                <label htmlFor="renovacaoAutomatica">
+                  Renovação Automática
+                </label>
+                <input
+                  type="text"
+                  id="renovacaoAutomatica"
+                  name="renovacaoAutomatica"
+                  value={renovacaoAutomatica}
+                  onChange={(e) => setRenovacaoAutomatica(e.target.value)}
+                  autoComplete="off"
+                />
+              </div>
+              <div className="input-group">
+                <label htmlFor="indiceReajuste">Índice de Reajuste</label>
+                <input
+                  type="text"
+                  id="indiceReajuste"
+                  name="indiceReajuste"
+                  value={indiceReajuste}
+                  onChange={(e) => setIndiceReajuste(e.target.value)}
                   autoComplete="off"
                 />
               </div>

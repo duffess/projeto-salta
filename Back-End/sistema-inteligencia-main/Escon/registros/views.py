@@ -29,7 +29,8 @@ class FornecedorView(APIView):
         return response
     
     def post(self, request):
-        serializer = SerializerFornecedor(data=request.data)
+        post_data = request.data
+        serializer = SerializerFornecedor(data=post_data)
         
         if serializer.is_valid():
             serializer.save()
@@ -74,7 +75,7 @@ class AnualViews(APIView):
     
     def post(self, request):
         post_data = request.data
-        serializer = SerializerContratoAnual(post_data)
+        serializer = SerializerContratoAnual(data=post_data)
         
         if serializer.is_valid():
             serializer.save()
@@ -118,7 +119,7 @@ class SpotView(APIView):
     
     def post(self, request):
         post_data = request.data
-        serializer = SerializerContratoSpot(post_data)
+        serializer = SerializerContratoSpot(data=post_data)
         
         if serializer.is_valid():
             serializer.save()
@@ -162,7 +163,7 @@ class ObrasView(APIView):
     
     def post(self, request):
         post_data = request.data
-        serializer = SerializerContratoObras(post_data)
+        serializer = SerializerContratoObras(data=post_data)
         
         if serializer.is_valid():
             serializer.save()

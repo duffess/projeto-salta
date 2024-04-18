@@ -4,7 +4,7 @@ import "./registroDeFornecedor.css";
 
 const App = () => {
   const [documento, setDocumento] = useState("");
-  const [tipoDocumento, setTipoDocumento] = useState("cpf"); 
+  const [tipoDocumento, setTipoDocumento] = useState("cpf");
   const [razaoSocial, setRazaoSocial] = useState("");
   const [email, setEmail] = useState("");
   const [tipoPagamento, setTipoPagamento] = useState("");
@@ -14,17 +14,31 @@ const App = () => {
   const [conta, setConta] = useState("");
   const [dv, setDv] = useState("");
   const [showPopUp, setShowPopUp] = useState(false);
-  const [formData, setFormData] = useState({});
 
-
-  const handleChange = (event) => {
-    const updatedFormData = { ...formData, [event.target.name]: event.target.value };
-    setFormData(updatedFormData);
-  };
-
-  const handleSubmit = async (e, formData, setFormData) => {
+  const handleSubmit = async (
+    e,
+    documento,
+    razaoSocial,
+    email,
+    tipoPagamento,
+    tipoConta,
+    banco,
+    agencia,
+    conta,
+    dv
+  ) => {
     e.preventDefault();
-    console.log("Dados a serem enviados:", formData);
+    console.log("Dados a serem enviados:", {
+      documento: documento,
+      razaoSocial: razaoSocial,
+      email: email,
+      tipoPagamento: tipoPagamento,
+      tipoConta: tipoConta,
+      banco: banco,
+      agencia: agencia,
+      conta: conta,
+      dv: dv,
+    });
     try {
       const response = await fetch(
         "http://127.0.0.1:8000/registro/fornecedor/",
@@ -33,28 +47,28 @@ const App = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify({
+            documento: documento,
+            razao_social: razaoSocial,
+            email: email,
+            tipo_pagamento: tipoPagamento,
+            tipo_conta: tipoConta,
+            banco: banco,
+            agencia: agencia,
+            conta: conta,
+            dv: dv,
+          }),
         }
       );
-
-      if (response.ok) {
-        setFormData({
-          documento: "",
-          tipoDocumento: "cpf",
-          razaoSocial: "",
-          email: "",
-          tipoPagamento: "",
-          tipoConta: "",
-          banco: "",
-          agencia: "",
-          conta: "",
-          dv: "", 
-        });
-
-        setShowPopUp(true);
-      } else {
-        console.error("Erro ao enviar os dados:", response.statusText);
-      }
+      setDocumento("");
+      setRazaoSocial("");
+      setEmail("");
+      setTipoPagamento("");
+      setTipoConta("");
+      setBanco("");
+      setAgencia("");
+      setConta("");
+      setDv("");
     } catch (error) {
       console.error("Erro ao enviar os dados:", error.message);
     }
@@ -65,7 +79,6 @@ const App = () => {
   };
 
   const PopUp = ({ onClose }) => {
-    console.log("teste");
     return (
       <div className="popup-overlay">
         <div className="popup-content">
@@ -95,15 +108,30 @@ const App = () => {
         <h1>SALTA INTELIGÊNCIA</h1>
       </header>
       <main className="main-fornecedor">
-          <div className="botoesAjuste">
-            <button>Registro</button>
-            <button>Ajuste</button>
-          </div>
+        <div className="botoesAjuste">
+          <button>Registro</button>
+          <button>Ajuste</button>
+        </div>
 
         <section className="content-registro-de-fornecedor">
-          <form onSubmit={handleSubmit}>
+          <form
+            onSubmit={(e) =>
+              handleSubmit(
+                e,
+                documento,
+                razaoSocial,
+                email,
+                tipoPagamento,
+                tipoConta,
+                banco,
+                agencia,
+                conta,
+                dv
+              )
+            }
+          >
             <div className="inputs-container">
-              {/* <div className="input-group">
+              <div className="input-group">
                 <label htmlFor="tipoDocumento">Tipo de Documento</label>
                 <select
                   id="tipoDocumento"
@@ -114,7 +142,7 @@ const App = () => {
                   <option value="cpf">CPF</option>
                   <option value="cnpj">CNPJ</option>
                 </select>
-              </div> */}
+              </div>
               <div className="input-group">
                 <label htmlFor="documento">
                   {tipoDocumento === "cpf" ? "CPF" : "CNPJ"}
@@ -233,4 +261,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default App; 

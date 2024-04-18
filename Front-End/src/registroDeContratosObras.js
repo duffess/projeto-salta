@@ -2,56 +2,98 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./registroDeFornecedor.css";
 
-const App = () => {
-  const [codigoContrato, setCodigoContrato] = useState("");
+const RegistroDeContratosObras = () => {
   const [marca, setMarca] = useState("");
   const [unidade, setUnidade] = useState("");
   const [fornecedor, setFornecedor] = useState("");
-  const [anoVigencia, setAnoVigencia] = useState("");
   const [linhaOrcamentaria, setLinhaOrcamentaria] = useState("");
+  const [anoVigencia, setAnoVigencia] = useState("");
   const [descricaoServico, setDescricaoServico] = useState("");
-  const [categoria, setCategoria] = useState("");
   const [valorContratado, setValorContratado] = useState("");
   const [distribuicaoMes, setDistribuicaoMes] = useState("");
-  const [nOTRS, setNOTRS] = useState("");
+  const [solicitante, setSolicitante] = useState("");
   const [linkDocumentacao, setLinkDocumentacao] = useState("");
+  const [nOTRS, setNOTRS] = useState("");
+  const [dataRegistroOTRS, setDataRegistroOTRS] = useState("");
+  const [proposta, setProposta] = useState("");
+  const [infoDiversas, setInfoDiversas] = useState("");
   const [showPopUp, setShowPopUp] = useState(false);
 
-  const handleSubmit = async (e, formData, setFormData) => {
+  const handleSubmit = async (
+    e,
+    marca,
+    unidade,
+    fornecedor,
+    linhaOrcamentaria,
+    descricaoServico,
+    valorContratado,
+    distribuicaoMes,
+    nOTRS,
+    dataRegistroOTRS,
+    linkDocumentacao,
+    anoVigencia,
+    solicitante,
+    infoDiversas,
+    proposta,
+  ) => {
     e.preventDefault();
-
+    console.log("Dados a serem enviados:", {
+      marca: marca,
+      unidade: unidade,
+      fornecedor: fornecedor,
+      linhaOrcamentaria: linhaOrcamentaria,
+      descricaoServico: descricaoServico,
+      valorContratado: valorContratado,
+      distribuicaoMes: distribuicaoMes,
+      nOTRS: nOTRS,
+      linkDocumentacao: linkDocumentacao,
+      data_registro_otrs: dataRegistroOTRS,
+      ano_vigencia: anoVigencia,
+      solicitante: solicitante,
+      info_diversas: infoDiversas,
+      proposta: proposta,
+    });
     try {
       const response = await fetch(
-        "http://localhost:8000/api/registros/fornecedores/",
+        "http://127.0.0.1:8000/registro/contrato_obras/",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify({
+            marca: marca,
+            unidade: unidade,
+            fornecedor: fornecedor,
+            natureza_orcamentaria: linhaOrcamentaria,
+            ano_vigencia: anoVigencia,
+            descricao_servico: descricaoServico,
+            valor_contratado: valorContratado,
+            distribuicao_mes: distribuicaoMes,
+            solicitante: solicitante,
+            links_docs: linkDocumentacao,
+            numero_otrs: nOTRS,
+            data_registro_otrs: dataRegistroOTRS,
+            info_diversas: infoDiversas,
+            contr_prop: proposta,
+          }),
         }
       );
-
-      if (response.ok) {
-        setFormData({
-          codigoContrato: "",
-          marca: "",
-          unidade: "",
-          fornecedor: "",
-          anoVigencia: "",
-          linhaOrcamentaria: "",
-          descricaoServico: "",
-          categoria: "",
-          valorContratado: "",
-          distribuicaoMes: "",
-          nOTRS: "",
-          linkDocumentacao: "",
-        });
-
-        setShowPopUp(true);
-      } else {
-        console.error("Erro ao enviar os dados:", response.statusText);
-      }
+      setMarca("");
+      setUnidade("");
+      setFornecedor("");
+      setLinhaOrcamentaria("");
+      setAnoVigencia("");
+      setDescricaoServico("");
+      setValorContratado("");
+      setDistribuicaoMes("");
+      setSolicitante("");
+      setLinkDocumentacao("");
+      setNOTRS("");
+      setDataRegistroOTRS("");
+      setProposta("")
+      setInfoDiversas("");
+      setShowPopUp(true);
     } catch (error) {
       console.error("Erro ao enviar os dados:", error.message);
     }
@@ -62,7 +104,6 @@ const App = () => {
   };
 
   const PopUp = ({ onClose }) => {
-    console.log("teste");
     return (
       <div className="popup-overlay">
         <div className="popup-content">
@@ -83,24 +124,41 @@ const App = () => {
         <h1>SALTA INTELIGÊNCIA</h1>
       </header>
       <main className="main-fornecedor">
-
-      <div className="paiBotoes">
+        <div className="paiBotoes">
           <div className="botoesAjuste">
             <button>Registro</button>
             <button>Ajuste</button>
           </div>
 
           <div className="botoesContratos">
-          <Link to="/registroDeContratosSpot">SPOT</Link>
-          <Link to="/registroDeContratosAnual">ANUAL</Link>
-          <Link to="/registroDeContratosObras">OBRAS</Link>
+            <Link to="/registroDeContratosSpot">SPOT</Link>
+            <Link to="/registroDeContratosAnual">ANUAL</Link>
+            <Link to="/registroDeContratosObras">OBRAS</Link>
           </div>
         </div>
         <section className="content-registro-de-fornecedor">
-          <form onSubmit={handleSubmit}>
+          <form
+            onSubmit={(e) =>
+              handleSubmit(
+                e,
+                marca,
+                unidade,
+                fornecedor,
+                linhaOrcamentaria,
+                descricaoServico,
+                valorContratado,
+                distribuicaoMes,
+                nOTRS,
+                dataRegistroOTRS,
+                linkDocumentacao,
+                anoVigencia,
+                solicitante,
+                infoDiversas,
+                proposta,
+              )
+            }
+          >
             <div className="inputs-container">
-              <div className="input-group">
-              </div>
               <div className="input-group">
                 <label htmlFor="marca">Marca</label>
                 <input
@@ -135,17 +193,6 @@ const App = () => {
                 />
               </div>
               <div className="input-group">
-                <label htmlFor="anoVigencia">Ano de Vigência</label>
-                <input
-                  type="text"
-                  id="anoVigencia"
-                  name="anoVigencia"
-                  value={anoVigencia}
-                  onChange={(e) => setAnoVigencia(e.target.value)}
-                  autoComplete="off"
-                />
-              </div>
-              <div className="input-group">
                 <label htmlFor="linhaOrcamentaria">Linha Orçamentária</label>
                 <input
                   type="text"
@@ -157,6 +204,17 @@ const App = () => {
                 />
               </div>
               <div className="input-group">
+                <label htmlFor="anoVigencia">Ano de Vigência</label>
+                <input
+                  type="text"
+                  id="anoVigencia"
+                  name="anoVigencia"
+                  value={anoVigencia}
+                  onChange={(e) => setAnoVigencia(e.target.value)}
+                  autoComplete="off"
+                />
+              </div>
+              <div className="input-group">
                 <label htmlFor="descricaoServico">Descrição de Serviço</label>
                 <input
                   type="text"
@@ -164,17 +222,6 @@ const App = () => {
                   name="descricaoServico"
                   value={descricaoServico}
                   onChange={(e) => setDescricaoServico(e.target.value)}
-                  autoComplete="off"
-                />
-              </div>
-              <div className="input-group">
-                <label htmlFor="categoria">Categoria</label>
-                <input
-                  type="text"
-                  id="categoria"
-                  name="categoria"
-                  value={categoria}
-                  onChange={(e) => setCategoria(e.target.value)}
                   autoComplete="off"
                 />
               </div>
@@ -201,13 +248,13 @@ const App = () => {
                 />
               </div>
               <div className="input-group">
-                <label htmlFor="nOTRS">Nº OTRS</label>
+                <label htmlFor="solicitante">Solicitante</label>
                 <input
                   type="text"
-                  id="nOTRS"
-                  name="nOTRS"
-                  value={nOTRS}
-                  onChange={(e) => setNOTRS(e.target.value)}
+                  id="solicitante"
+                  name="solicitante"
+                  value={solicitante}
+                  onChange={(e) => setSolicitante(e.target.value)}
                   autoComplete="off"
                 />
               </div>
@@ -219,6 +266,51 @@ const App = () => {
                   name="linkDocumentacao"
                   value={linkDocumentacao}
                   onChange={(e) => setLinkDocumentacao(e.target.value)}
+                  autoComplete="off"
+                />
+              </div>
+              <div className="input-group">
+                <label htmlFor="nOTRS">Nº OTRS</label>
+                <input
+                  type="text"
+                  id="nOTRS"
+                  name="nOTRS"
+                  value={nOTRS}
+                  onChange={(e) => setNOTRS(e.target.value)}
+                  autoComplete="off"
+                />
+              </div>
+              <div className="input-group">
+                <label htmlFor="nOTRS">Data de Registro OTRS</label>
+                <input
+                  type="text"
+                  id="dataRegistroOtrs"
+                  name="dataRegistroOtrs"
+                  value={dataRegistroOTRS}
+                  onChange={(e) => setDataRegistroOTRS(e.target.value)}
+                  autoComplete="off"
+                />
+              </div>
+              <div className="input-group">
+                <label htmlFor="proposta">Proposta</label>
+                <input
+                  type="text"
+                  id="proposta"
+                  name="proposta"
+                  value={proposta}
+                  onChange={(e) => setProposta(e.target.value)}
+                  autoComplete="off"
+                />
+              </div>
+
+              <div className="input-group">
+                <label htmlFor="infoDiversas">Informações Diversas</label>
+                <input
+                  type="text"
+                  id="infoDiversas"
+                  name="infoDiversas"
+                  value={infoDiversas}
+                  onChange={(e) => setInfoDiversas(e.target.value)}
                   autoComplete="off"
                 />
               </div>
@@ -236,4 +328,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default RegistroDeContratosObras;
