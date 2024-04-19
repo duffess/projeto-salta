@@ -1,15 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
-import Login from "./login.js";
-import Home from "./home.js";
-import AreaRegistro from "./areaRegistros.js";
-import RegistroDeFornecedor from "./registroDeFornecedor.js";
-import RegistroDeContratosSpot from "./registroDeContratosSpot.js";
-import RegistroDeContratosAnual from "./registroDeContratosAnual.js";
-import RegistroDeContratosObras from "./registroDeContratosObras.js";
-import AreaAcompanhamento from "./areaAcompanhamento.js";
-import CentralPagamento from "./centralPagamento.js";
+import Login from "./js/login.js";
+import Home from "./js/home.js";
+import AreaRegistro from "./js/areaRegistros.js";
+import RegistroDeFornecedor from "./js/registroDeFornecedor.js";
+import RegistroDeContratosSpot from "./js/registroDeContratosSpot.js";
+import RegistroDeContratosAnual from "./js/registroDeContratosAnual.js";
+import RegistroDeContratosObras from "./js/registroDeContratosObras.js";
+import AreaAcompanhamento from "./js/areaAcompanhamento.js";
+import CentralPagamento from "./js/centralPagamento.js";
+import Cadastro from "./js/cadastro.js";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -27,6 +27,7 @@ root.render(
         <Route path="/registroDeContratosObras" element={<RegistroDeContratosObras />} />
         <Route path="/areaAcompanhamento" element={<AreaAcompanhamento />} />
         <Route path="/centralPagamento" element={<CentralPagamento />} />
+        <Route path="/cadastro" element={<Cadastro />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

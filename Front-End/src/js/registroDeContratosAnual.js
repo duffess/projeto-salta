@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./registroDeFornecedor.css";
+import "../css/formularioRegistros.css";
 
 const App = () => {
   const [marca, setMarca] = useState("");

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { IMaskInput } from "react-imask";
-import "./registroDeFornecedor.css";
+import "../css/formularioRegistros.css";
 
 const App = () => {
   const [documento, setDocumento] = useState("");

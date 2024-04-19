@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./home.css";
+import '../css/areaRegistros.css';
 
 function Home() {
   return (

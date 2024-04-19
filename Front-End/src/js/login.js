@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
-import "./login.css";
+import "../css/login.css";
 
 function App() {
   return (
@@ -19,9 +19,11 @@ function App() {
               LOGIN
             </Link>
           </button>
-          {/* <button type="button" className="Create-Account-Button">
-            CREATE NEW ACCOUNT
-          </button> */}
+          <button type="button" className="Create-Account-Button">
+            <Link className="Create-Account-Button" to="/cadastro" style={{ textDecoration: "none" }}>
+              CREATE NEW ACCOUNT
+            </Link>
+          </button>
           <Link className="links" to="" style={{ textDecoration: "none" }}>
             Forgot your password?
           </Link>
