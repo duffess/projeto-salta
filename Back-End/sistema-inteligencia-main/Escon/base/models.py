@@ -9,6 +9,7 @@ class Marca(models.Model):
     
 class Unidade(models.Model):
     nome = models.CharField(max_length=150)
+    endereco = models.CharField(max_length=150, default = "")
     marca = models.ForeignKey(Marca, on_delete=models.CASCADE)
     
     def __str__(self):
