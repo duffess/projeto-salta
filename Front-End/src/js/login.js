@@ -24,7 +24,7 @@ function App() {
               CREATE NEW ACCOUNT
             </Link>
           </button>
-          <Link className="links" to="" style={{ textDecoration: "none" }}>
+          <Link className="links" to="/forgotPass" style={{ textDecoration: "none" }}>
             Forgot your password?
           </Link>
         </div>

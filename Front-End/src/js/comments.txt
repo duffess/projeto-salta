@@ -1,0 +1,114 @@
+useEffect(() => {
+  const fetchMarcas = async () => {
+    const response = await fetch('http://127.0.0.1:8000/base/marcas/', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const marcas = await response.json();
+    const marcasFiltradas = marcas.filter((marca) => marca.brand === selectedBrand);
+    setMarcas(marcasFiltradas);
+  };
+
+  fetchMarcas();
+}, [selectedBrand]);
+
+
+UseEffect para filtrar unidade de acordo com a marca escolhida.
+
+- - - - - - - - - - - - - 
+
+<select onChange={handleUnitChange}>
+  {units.map((unit) => (
+    <option key={unit.id} value={unit.id}>
+      {unit.name}
+    </option>
+  ))}
+</select>
+
+Map para iterar sobre as unidades filtradas e mostrar no select
+
+- - - - - - - - - - - - - 
+
+return (
+    <div>
+      <select onChange={handleBrandChange}>
+        <option value="">Selecione a marca</option>
+        <option value="marca1">Marca 1</option>
+        <option value="marca2">Marca 2</option>
+      </select>
+      <select onChange={handleUnitChange}>
+        {units.map((unit) => (
+          <option key={unit.id} value={unit.id}>
+            {unit.name}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+};
+
+- - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+
+const handleSubmit = async (
+    e,
+    documento,
+    razaoSocial,
+    email,
+    tipoPagamento,
+    tipoConta,
+    banco,
+    agencia,
+    conta,
+    dv
+  ) => {
+    e.preventDefault();
+    console.log("Dados a serem enviados:", {
+      documento: documento,
+      razaoSocial: razaoSocial,
+      email: email,
+      tipoPagamento: tipoPagamento,
+      tipoConta: tipoConta,
+      banco: banco,
+      agencia: agencia,
+      conta: conta,
+      dv: dv,
+    });
+    try {
+      const response = await fetch(
+        "http://127.0.0.1:8000/registro/fornecedor/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            documento: documento,
+            razao_social: razaoSocial,
+            email: email,
+            tipo_pagamento: tipoPagamento,
+            tipo_conta: tipoConta,
+            banco: banco,
+            agencia: agencia,
+            conta: conta,
+            dv: dv,
+          }),
+        }
+      );
+      setDocumento("");
+      setRazaoSocial("");
+      setEmail("");
+      setTipoPagamento("");
+      setTipoConta("");
+      setBanco("");
+      setAgencia("");
+      setConta("");
+      setDv("");
+    } catch (error) {
+      console.error("Erro ao enviar os dados:", error.message);
+    }
+  };

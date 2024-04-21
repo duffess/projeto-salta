@@ -10,6 +10,7 @@ import RegistroDeContratosObras from "./js/registroDeContratosObras.js";
 import AreaAcompanhamento from "./js/areaAcompanhamento.js";
 import CentralPagamento from "./js/centralPagamento.js";
 import Cadastro from "./js/cadastro.js";
+import ForgotPass from "./js/forgotPass.js";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -28,6 +29,7 @@ root.render(
         <Route path="/areaAcompanhamento" element={<AreaAcompanhamento />} />
         <Route path="/centralPagamento" element={<CentralPagamento />} />
         <Route path="/cadastro" element={<Cadastro />} />
+        <Route path="/forgotPass" element={<ForgotPass />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

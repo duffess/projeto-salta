@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../css/formularioRegistros.css";
 
 const App = () => {
+  const [bases, setBases] = useState([]);
   const [marca, setMarca] = useState("");
   const [unidade, setUnidade] = useState("");
   const [fornecedor, setFornecedor] = useState("");
@@ -28,7 +29,7 @@ const App = () => {
     distribuicaoMes,
     nOTRS,
     dataRegistroOTRS,
-    linkDocumentacao,
+    linkDocumentacao
   ) => {
     e.preventDefault();
     console.log("Dados a serem enviados:", {
@@ -58,27 +59,27 @@ const App = () => {
             fornecedor: fornecedor,
             natureza_orcamentaria: linhaOrcamentaria,
             descricao_servico: descricaoServico,
-            categoria: categoria,
             valor_contratado: valorContratado,
             distribuicao_mes: distribuicaoMes,
-            numero_otrs: nOTRS,
+            categoria: categoria,
             links_docs: linkDocumentacao,
+            numero_otrs: nOTRS,
             data_registro_otrs: dataRegistroOTRS,
           }),
         }
       );
-      setMarca("");
-      setUnidade("");
-      setFornecedor("");
-      setLinhaOrcamentaria("");
-      setDescricaoServico("");
-      setCategoria("");
-      setValorContratado("");
-      setDistribuicaoMes("");
-      setNOTRS("");
-      setDataRegistroOTRS("")
-      setLinkDocumentacao("");
-      setShowPopUp(true); 
+      // setMarca("");
+      // setUnidade("");
+      // setFornecedor("");
+      // setLinhaOrcamentaria("");
+      // setDescricaoServico("");
+      // setCategoria("");
+      // setValorContratado("");
+      // setDistribuicaoMes("");
+      // setNOTRS("");
+      // setDataRegistroOTRS("");
+      // setLinkDocumentacao("");
+      // setShowPopUp(true);
     } catch (error) {
       console.error("Erro ao enviar os dados:", error.message);
     }
@@ -103,6 +104,16 @@ const App = () => {
     );
   };
 
+  useEffect(() => {
+    const fetchBases = async () => {
+      const response = await fetch("http://127.0.0.1:8000/base/marcas/");
+      const data = await response.json();
+      setBases(data);
+    };
+
+    fetchBases();
+  }, []);
+
   return (
     <div className="container-registro-de-fornecedor">
       <header>
@@ -126,7 +137,7 @@ const App = () => {
             onSubmit={(e) =>
               handleSubmit(
                 e,
-                marca,
+                marca,  
                 unidade,
                 fornecedor,
                 linhaOrcamentaria,
@@ -136,7 +147,7 @@ const App = () => {
                 distribuicaoMes,
                 nOTRS,
                 linkDocumentacao,
-                dataRegistroOTRS,
+                dataRegistroOTRS
               )
             }
           >
@@ -144,14 +155,16 @@ const App = () => {
               <div className="input-group"></div>
               <div className="input-group">
                 <label htmlFor="marca">Marca</label>
-                <input
-                  type="text"
-                  id="marca"
-                  name="marca"
-                  value={marca}
-                  onChange={(e) => setMarca(e.target.value)}
-                  autoComplete="off"
-                />
+                
+
+                <select onChange={(e) => setMarca(e.target.value)} > 
+                  <option value="">Selecione uma base</option>
+                  {bases.map((base) => (
+                    <option key={base.id} value={base.id}>
+                      {base.marca}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div className="input-group">
                 <label htmlFor="unidade">Unidade</label>
